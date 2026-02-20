@@ -8,6 +8,9 @@ from pydub import AudioSegment
 from vachana_g2p import th2ipa
 from utils import chunk_text, load_model
 
+DEVICE = "cuda" if "CUDAExecutionProvider" in ort.get_available_providers() else "cpu"
+print(f"Device : {DEVICE}")
+
 ROOT = "checkpoints"
 MODELS = [f"{ROOT}/Preprocess.onnx", f"{ROOT}/Transformer.onnx", f"{ROOT}/Vocoder.onnx"]
 SAMPLE_RATE, HOP_LENGTH, NFE_STEP = 24000, 256, 20
@@ -98,4 +101,5 @@ def TTS(ref_audio, ref_text, gen_text, speed=1.0, output="generated.wav", verbos
         generated_wavs.append(generated_signal)
 
     sf.write(output, np.concatenate(generated_wavs, axis=-1).reshape(-1), SAMPLE_RATE)
+
     print(f"\nGeneration time: {time.time() - start:.3f}s")
