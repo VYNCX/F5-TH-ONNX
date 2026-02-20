@@ -1,0 +1,5 @@
+vachana-g2p
+onnxruntime-gpu
+pydub
+soundfile
+huggingface-hub
