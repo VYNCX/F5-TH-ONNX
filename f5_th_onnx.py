@@ -6,7 +6,7 @@ from tqdm import trange
 import onnxruntime as ort
 from pydub import AudioSegment
 from vachana_g2p import th2ipa
-from utils import chunk_text, load_model
+from .utils import chunk_text, load_model
 
 DEVICE = "cuda" if "CUDAExecutionProvider" in ort.get_available_providers() else "cpu"
 print(f"Device : {DEVICE}")
@@ -103,3 +103,4 @@ def TTS(ref_audio, ref_text, gen_text, speed=1.0, output="generated.wav", verbos
     sf.write(output, np.concatenate(generated_wavs, axis=-1).reshape(-1), SAMPLE_RATE)
 
     print(f"\nGeneration time: {time.time() - start:.3f}s")
+
