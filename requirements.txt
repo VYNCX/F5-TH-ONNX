@@ -2,4 +2,5 @@ vachana-g2p
 onnxruntime-gpu
 pydub
 soundfile
+tqdm
 huggingface-hub
